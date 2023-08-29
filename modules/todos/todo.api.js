@@ -26,9 +26,7 @@ next(error);
 
 // create 
 router.post('/',async(req,res,next)=>{
-    const {payload}=req.body;
     try{
-        const {payload}=req.params
         const result= await todoController.create(payload);
         res.json({data:result,msg:'success'})
     }
@@ -43,7 +41,7 @@ router.put('/:id',async(req,res,next)=>{
     try{
         const {id}=req.params;
         const {payload}=req.body;
-        const result=await todoController.updatebyId(id,payload);
+        const result=await todoController.updatebyId(id,req.body);
         res.json({data:'result',msg:'success'})
     }
     catch(error){
