@@ -5,4 +5,4 @@ title : String,
 status : {type: String,enum:['pending','completed'],default:'pending'},
 ...commonSchema,
 });
-module.exports=new model("Subtask",SubtaskSchema);
+model.exports=new model("Subtask",SubtaskSchema);

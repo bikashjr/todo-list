@@ -5,5 +5,5 @@ const create=(payload)=>{
 const getById=(id)=>{};
 const list=()=>{};
 const updatebyId=(id,payload)=>{};
-const remove=(id)=>{};
-module.exports = {create,list,updatebyId,remove,getById}
+const deleteById=(id)=>{};
+module.exports = {create,list,updatebyId,deleteById,getById}
