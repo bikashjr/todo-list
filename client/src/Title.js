@@ -6,11 +6,7 @@ function Title({heading}) {
   return (
     <Container>
       <Row>
-        
-      </Row>
-      <Row>
-        
-        <Col sm className="text-center " ><h1>{heading}</h1></Col>
+        <Col sm className="text-center" ><h1>{heading}</h1></Col>
       </Row>
     </Container>
   );

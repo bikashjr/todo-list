@@ -1,12 +1,8 @@
-import { Button } from "react-bootstrap";
 import React from "react";
+import { Button } from "bootstrap";
 
-function CButton({ title }) {
-  return (
-    <div>
-      <Button variant="primary">{title}</Button>
-    </div>
-  );
+function CButton() {
+  return <div></div>;
 }
 
 export default CButton;

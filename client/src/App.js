@@ -1,11 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import CButton from "./Button.js";
+// import Button from 'react-bootstrap/Button';
 import Title from "./Title.js"
+import Input from "./Input.js";
+
+
 function App() {
   return (
     <>
-      {/* <CButton title="hello world" /> */}
       <Title heading="TODO-APP"/>
+      <Input/>
     </>
   );
 }
