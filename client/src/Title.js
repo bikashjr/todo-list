@@ -1,15 +1,11 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import React from "react";
-function Title({heading}) {
-  return (
-    <Container>
-      <Row>
-        <Col sm className="text-center" ><h1>{heading}</h1></Col>
-      </Row>
-    </Container>
-  );
+import React from 'react';
+
+
+
+const Title = ({title}) => {
+    return (
+        <div> <h1 className='text-center my-5'>{title}</h1></div>
+    )
 }
 
-export default Title;
+export default Title 

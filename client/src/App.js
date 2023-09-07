@@ -1,16 +1,29 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-// import Button from 'react-bootstrap/Button';
-import Title from "./Title.js"
-import Input from "./Input.js";
+import {useEffect,useState} from 'react';
 
+const App = () => {
+    const [count,setCount]=useState(0)
 
-function App() {
-  return (
-    <>
-      <Title heading="TODO-APP"/>
-      <Input/>
-    </>
-  );
+    useEffect(()=>{
+        setTimeout(()=>{
+            setCount((count +1)
+            );
+        },1000)
+    })
+
+    useEffect(()=>{
+        let isMounted =false;
+        const fetchData=()=>{
+            isMounted=true
+        }
+        return ()=>{
+            isMounted=false
+        }
+    })
+    return (
+
+        <h1>HELLO FROM {count}</h1>
+    )
 }
+
 
 export default App;
