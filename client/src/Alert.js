@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 
-const CAlert = ({ variant,message}) => {
+const Alertmsg = ({ variant,message}) => {
     console.log(message);
     return (
         <div className='text-center'>   
@@ -11,4 +11,4 @@ const CAlert = ({ variant,message}) => {
 }
 
 
-export default CAlert;
+export default Alertmsg;

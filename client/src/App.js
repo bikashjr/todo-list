@@ -1,29 +1,22 @@
-import {useEffect,useState} from 'react';
-
-const App = () => {
-    const [count,setCount]=useState(0)
-
-    useEffect(()=>{
-        setTimeout(()=>{
-            setCount((count +1)
-            );
-        },1000)
-    })
-
-    useEffect(()=>{
-        let isMounted =false;
-        const fetchData=()=>{
-            isMounted=true
-        }
-        return ()=>{
-            isMounted=false
-        }
-    })
-    return (
-
-        <h1>HELLO FROM {count}</h1>
-    )
-}
+import Addtasks from './Addtasks';
+import Alertmsg from './Alert';
+import ListTask from './ListTask';
+import Title from './Title';
 
 
-export default App;
+
+function App() {
+  return (
+    <div>
+            <Title title="TODO-APP"/>
+    
+        <Addtasks label="Add New Todo?" placeholder="Add your todos"/>
+    
+        <Alertmsg variant='danger' message="No todos Found!!"/>
+    <ListTask/>
+        </div>
+        )
+  }
+    
+
+export default App
