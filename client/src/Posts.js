@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect,useState } from 'react';
-const Posts =()=>{}
+const Posts =()=>{
 const [posts,setPosts]=useState([])
 
 useEffect(()=>{
@@ -22,24 +22,28 @@ return(isMounted)=>{
     isMounted=false;
 }
 },[])
+
+return<>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Contact</th>
+<th>Country</th>
+</tr>
+</thead>
+<tbody>
+{posts && posts.length>0 && posts.map((post)=>{
 return(
-    <>
-    <table>
-    <thead>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  </tbody>
+<tr key={post?.id}>
+<td>{post?.userId}</td>
+<td>{post?.title}</td>
+<td>{post?.body}</td>
+</tr>
+)
+})}
+</tbody>
 </table>
 </>
-)
+}
 export default Posts;

@@ -1,6 +1,8 @@
 import Addtasks from './Addtasks';
 import Alertmsg from './Alert';
 import ListTask from './ListTask';
+import Posts from './Posts'
+import PostDetails from './PostDetails';
 import Title from './Title';
 
 
@@ -14,6 +16,10 @@ function App() {
     
         <Alertmsg variant='danger' message="No todos Found!!"/>
     <ListTask/>
+    
+    <PostDetails/>
+    <br/>
+    <Posts/>
         </div>
         )
   }

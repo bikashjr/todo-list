@@ -1,15 +1,15 @@
-import React from 'react';
 import { useEffect,useState } from 'react';
-const Posts =()=>{}
-const [posts,setPosts]=useState([])
+const PostDetails =()=>{
+const [id,setId]=useState(1)
+const [post,setPost]=useState({})
 
 useEffect(()=>{
 let isMounted=false;
-const fetchData=(isMounted)=>{
+const fetchData=({isMounted,id})=>{
     isMounted=false;
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
     .then((res)=> res.json())
-    .then((data)=>setPosts(data))
+    .then((data)=>setPost(data))
     .catch((e)=>{
         console.log(e);
     })
@@ -17,29 +17,22 @@ const fetchData=(isMounted)=>{
         isMounted=false;
     });
 };
-fetchData(isMounted);
+fetchData({isMounted,id});
 return(isMounted)=>{
     isMounted=false;
 }
-},[])
-return(
-    <>
-    <table>
-    <thead>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  </tbody>
-</table>
-</>
-)
-export default Posts
+},[id])
+return<>
+  <input type='text' onChange={(event)=>{setId(event.target.value)}}/>
+  <p>{post?.userId}</p>
+  <br />
+  <p>{post?.id}</p>
+  <br />
+  <p>{post?.title}</p>
+  <br />
+  <p>{post?.body}</p>
+  <br />
+  </>
+}
+
+export default PostDetails
