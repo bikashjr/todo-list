@@ -1,12 +1,16 @@
-import React, { createContext } from "react";
+import { createContext, useContext } from "react";
 import useApi from "../hooks/useApi";
 
-const DataContext = createContext();
+const APIContext = createContext(null);
 
-const DataContextProvider = ({ children }) => {
+export default function APIContextProvider({ children }) {
   const api = useApi();
+  return <APIContext.Provider value={api}>{children}</APIContext.Provider>;
+}
 
-  return <DataContext.Provider value={api}>{children}</DataContext.Provider>;
+export const useAPIContext = () => {
+  const context = useContext(APIContext);
+  if (!context)
+    throw new Error("API Context must be wrapped inside API Context Provider");
+  return context;
 };
-
-export { DataContext, DataContextProvider };

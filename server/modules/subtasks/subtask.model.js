@@ -1,11 +1,13 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
+const commonSchema = require("../../utils/commonSchema");
 
-const { ObjectId } = mongoose.Schema;
+const { ObjectId } = Schema.Types;
 
-const subTaskSchema = mongoose.Schema({
+const subTaskSchema = new Schema({
   title: { type: String, required: true },
-  status: { type: String, enums: ["pending", "complete"], default: "pending" },
+  status: { type: String, enum: ["pending", "complete"], default: "pending" },
   todo: { type: ObjectId, ref: "Todo" }, // Reference to Todo model
+  ...commonSchema,
 });
 
-module.exports = mongoose.model("Subtask", subTaskSchema);
+module.exports = model("Subtask", subTaskSchema);

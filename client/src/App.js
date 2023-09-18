@@ -1,25 +1,39 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+
 import Title from "./components/Title";
-import Todo from "./pages/Todo";
-import AddTodo from "./components/AddTodo";
-import { API_SERVER } from "./constants";
+import AddTask from "./components/AddInputGroup";
+import ListTask from "./components/ListTask";
+import { URLS } from "./constants";
+import { useAPIContext } from "./contexts";
+import Toastr from "./global/Toastr";
 
 function App() {
+  const { data: tasks, error, list } = useAPIContext();
+
+  useEffect(() => {
+    list(URLS.TODOS);
+  }, [list]);
+
+  if (error) return <>{JSON.stringify(error)}</>;
+
   return (
     <>
-      <Container>
+      <Container className="text-center">
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Title name="TODO App" />
-            <AddTodo
-              label="Add New Task"
+            <Title title="TODO APP" />
+            <AddTask
+              url={URLS.TODOS}
+              label="Add new Todo?"
               placeholder="Eg: Do Laundry"
-              url={`${API_SERVER}/todos`}
+              buttonName="Add the task"
             />
-            <Todo />
+            <ListTask tasks={tasks} />
           </Col>
         </Row>
       </Container>
+      <Toastr />
     </>
   );
 }

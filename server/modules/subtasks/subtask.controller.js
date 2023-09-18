@@ -1,25 +1,33 @@
-const SubtaskModel = require("./subtask.model");
+const TodoModel = require("../todos/todo.model");
+const Model = require("./subtask.model");
 
-// CRUD
-
-const create = (payload) => {
-  return SubtaskModel.create(payload);
+const create = async (payload) => {
+  return await Model.create(payload);
 };
 
-const list = () => {
-  return SubtaskModel.find();
+const list = async () => {
+  return await Model.find();
 };
 
-const getById = (id) => {
-  return SubtaskModel.findOne({ _id: id });
+const getById = async (id) => {
+  return await Model.findOne({ _id: id });
 };
 
-const updateById = (id, payload) => {
-  return SubtaskModel.updateOne({ _id: id }, payload);
+const updatebyId = async (id, payload) => {
+  const { status } = payload;
+  if (status === "pending") {
+    const subtask = await Model.findOne({ _id: id });
+    await TodoModel.findOneAndUpdate(
+      { _id: subtask?.todo },
+      { status: "pending" },
+      { new: true }
+    );
+  }
+  return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
 };
 
-const remove = (id) => {
-  return SubtaskModel.deleteOne({ _id: id });
+const remove = async (id) => {
+  return await Model.deleteOne({ _id: id });
 };
 
-module.exports = { create, list, getById, updateById, remove };
+module.exports = { create, list, getById, updatebyId, remove };

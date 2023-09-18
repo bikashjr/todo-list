@@ -1,21 +1,30 @@
 require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
+const app = express();
+const indexRouter = require("./routes");
+const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 
-const app = express();
-const PORT = process.env.PORT || 3005;
+// connect db
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => console.log("DATABASE CONNECTED!!"));
 
-mongoose.connect(process.env.DB).then(() => {
-  console.log("Connected to MongoDB");
-});
-
-const indexRouter = require("./routes");
+// Enable CORS
 app.use(cors());
+
+// enable json body
 app.use(express.json());
 
+//create routes
 app.use("/", indexRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.use((err, req, res, next) => {
+  err = err ? err.toString() : "Something went wrong...";
+  res.status(500).json({ data: "", msg: err });
+});
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
 });

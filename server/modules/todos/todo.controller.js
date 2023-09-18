@@ -1,15 +1,17 @@
-const TodoModel = require("./todo.model");
+const Model = require("./todo.model");
+const subtaskModel = require("../subtasks/subtask.model");
 
-// CRUD
-
-const create = (payload) => {
-  return TodoModel.create(payload);
+const create = async (payload) => {
+  const { title } = payload;
+  return await Model.create({ title });
 };
 
-const list = () => {
-  // Complex aggregation
-  // return TodoModel.find();
-  return TodoModel.aggregate([
+const getById = async (id) => {
+  return await Model.findOne({ _id: id });
+};
+
+const list = async () => {
+  return await Model.aggregate([
     {
       $lookup: {
         from: "subtasks",
@@ -21,16 +23,23 @@ const list = () => {
   ]);
 };
 
-const getById = (id) => {
-  return TodoModel.findOne({ _id: id });
+const updatebyId = async (id, payload) => {
+  const { status } = payload;
+  if (status === "completed") {
+    const result = await subtaskModel.find({ todo: id });
+    result.map(async (subtask) => {
+      await subtaskModel.findOneAndUpdate(
+        { _id: subtask?._id },
+        { status: "completed" },
+        { new: true }
+      );
+    });
+  }
+  return await Model.findOneAndUpdate({ _id: id }, payload, { new: true });
 };
 
-const updateById = (id, payload) => {
-  return TodoModel.updateOne({ _id: id }, payload);
+const remove = async (id) => {
+  return await Model.deleteOne({ _id: id });
 };
 
-const remove = (id) => {
-  return TodoModel.deleteOne({ _id: id });
-};
-
-module.exports = { create, list, getById, updateById, remove };
+module.exports = { create, getById, list, updatebyId, remove };
