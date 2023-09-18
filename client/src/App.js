@@ -1,28 +1,27 @@
-import Addtasks from './Addtasks';
-import Alertmsg from './Alert';
-import ListTask from './ListTask';
-import Posts from './Posts'
-import PostDetails from './PostDetails';
-import Title from './Title';
-
-
+import { Container, Row, Col } from "react-bootstrap";
+import Title from "./components/Title";
+import Todo from "./pages/Todo";
+import AddTodo from "./components/AddTodo";
+import { API_SERVER } from "./constants";
 
 function App() {
   return (
-    <div>
-            <Title title="TODO-APP"/>
-    
-        <Addtasks label="Add New Todo?" placeholder="Add your todos"/>
-    
-        <Alertmsg variant='danger' message="No todos Found!!"/>
-    <ListTask/>
-    
-    <PostDetails/>
-    <br/>
-    <Posts/>
-        </div>
-        )
-  }
-    
+    <>
+      <Container>
+        <Row>
+          <Col md={{ span: 6, offset: 3 }}>
+            <Title name="TODO App" />
+            <AddTodo
+              label="Add New Task"
+              placeholder="Eg: Do Laundry"
+              url={`${API_SERVER}/todos`}
+            />
+            <Todo />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
 
-export default App
+export default App;

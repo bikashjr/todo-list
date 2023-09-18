@@ -1,9 +1,25 @@
-const Model=require("./subtask.model")
-const create=(payload)=>{
+const SubtaskModel = require("./subtask.model");
 
+// CRUD
+
+const create = (payload) => {
+  return SubtaskModel.create(payload);
 };
-const getById=(id)=>{};
-const list=()=>{};
-const updatebyId=(id,payload)=>{};
-const deleteById=(id)=>{};
-module.exports = {create,list,updatebyId,deleteById,getById}
+
+const list = () => {
+  return SubtaskModel.find();
+};
+
+const getById = (id) => {
+  return SubtaskModel.findOne({ _id: id });
+};
+
+const updateById = (id, payload) => {
+  return SubtaskModel.updateOne({ _id: id }, payload);
+};
+
+const remove = (id) => {
+  return SubtaskModel.deleteOne({ _id: id });
+};
+
+module.exports = { create, list, getById, updateById, remove };
